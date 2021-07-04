@@ -14,12 +14,18 @@ public class FormationController : MonoBehaviour
     public float squareOffsetY = 1.25f;    // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
     [Header("Spiral Settings")]
     public float spiralOffset = 1.25f;    // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
-    public float spiralOffsetY = 0.5f;    // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
+    public float spiralOffsetY = 0.5f;    // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
+    [Header("Triangle Settings")]
+    public int rows = 3;    // Üçgenin en alt kýsýma eklenecek üçgen sayýsý-1
+    public float rowOffset = -0.5f; // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
+    public float rowOffsetY = -1f;  // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
+    public float rowOffsetX = 1f;   // Yeni eklenecek nesnelerinin X eksenindeki uzaklýk mesafesi 
 
     [Header("Formations Bool")]
     public bool circleFormationBool = false;
     public bool squareFormationBool = false;
     public bool spiralFormationBool = false;
+    public bool triangleFormationBool = false;
     void Start()
     {
         if (circleFormationBool)
@@ -33,6 +39,10 @@ public class FormationController : MonoBehaviour
         if (spiralFormationBool)
         {
             SpiralFormation();
+        }
+        if (triangleFormationBool)
+        {
+            TriangleFormation();
         }
     }
 
@@ -109,5 +119,26 @@ public class FormationController : MonoBehaviour
             newObj.transform.position = targetPos;  // "newObj" adlý yeni oluþturulacak nesnenin pozisyonu "targetPos"un vector deðerlerini alýr
             newObj.transform.SetParent(spiral.transform);    // Oluþturulan "newObj" yeni nesneler "Spiral" nesnesinin alt nesnesi olur
         }
+    }
+    private void TriangleFormation()
+    {
+        Vector3 targetPos = Vector3.left;
+
+        GameObject triangle = new GameObject("Triangle");    // Oyun sahnesinde "Triangle" adlý yeni bir nesne oluþturur
+        triangle.transform.position = Vector3.zero;    // "Triangle" nesnesini pozisyonunu sýfýrlar
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                GameObject newObj = Instantiate(prefabObj);
+                targetPos = new Vector3(targetPos.x+rowOffsetX, targetPos.y, 0f);
+                newObj.transform.position = targetPos;
+                newObj.transform.SetParent(triangle.transform);    // Oluþturulan "newObj" yeni nesneler "Triangle" nesnesinin alt nesnesi olur
+            }
+            targetPos = new Vector3((rowOffset*i)-1f,targetPos.y+rowOffsetY,0f);
+           
+        }
+
     }
 }

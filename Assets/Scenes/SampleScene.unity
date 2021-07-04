@@ -294,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -16.92}
+  m_LocalPosition: {x: 0, y: -4, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -319,6 +319,11 @@ MonoBehaviour:
   squareOffsetY: 1.25
   spiralOffset: 1.25
   spiralOffsetY: 0.5
+  rows: 8
+  rowOffset: -0.5
+  rowOffsetY: -1
+  rowOffsetX: 1
   circleFormationBool: 0
   squareFormationBool: 0
-  spiralFormationBool: 1
+  spiralFormationBool: 0
+  triangleFormationBool: 1
