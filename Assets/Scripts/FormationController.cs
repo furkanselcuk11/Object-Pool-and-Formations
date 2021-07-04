@@ -7,10 +7,15 @@ public class FormationController : MonoBehaviour
     public GameObject prefabObj;
 
     public int newObjSize = 10;    // Eklenecek prefabObj sayýsý
-    public float distanceBetweenObj = 1.5f;    // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
+    public float distanceBetweenObj = 1.1f;    // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
+
+    public bool circleFormationBool = false;
     void Start()
     {
-        CircleFormation();
+        if (circleFormationBool)
+        {
+            CircleFormation();
+        }
     }
 
     private void CircleFormation()
