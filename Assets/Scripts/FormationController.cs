@@ -7,19 +7,26 @@ public class FormationController : MonoBehaviour
     [Header("Objects to add")]
     public GameObject prefabObj;
     public int newObjSize = 10;    // Eklenecek prefabObj sayýsý
+
     [Header("Circle Settings")]
     public float circleOffset = 1.25f;    // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
+
     [Header("Square Settings")]
     public float squareOffsetX = -1f;    // Yeni eklenecek nesnelerinin X eksenindeki uzaklýk mesafesi 
     public float squareOffsetY = 1.25f;    // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
+
     [Header("Spiral Settings")]
     public float spiralOffset = 1.25f;    // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
     public float spiralOffsetY = 0.5f;    // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
+
     [Header("Triangle Settings")]
     public int rows = 3;    // Üçgenin en alt kýsýma eklenecek üçgen sayýsý-1
     public float rowOffset = -0.5f; // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
-    public float rowOffsetY = -1f;  // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
-    public float rowOffsetX = 1f;   // Yeni eklenecek nesnelerinin X eksenindeki uzaklýk mesafesi 
+    public float heightOffset = -1f;  // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
+    public float widthOffset = 1f;   // Yeni eklenecek nesnelerinin X eksenindeki uzaklýk mesafesi 
+    private enum Direction { Up,Down,Left,Right};   // Üçgenin hangi yöne bakacaðý
+    [SerializeField] private Direction triangleDirection;
+
     [Header("Sphere Settings")]
     public int sphereNumberOfPoints = 5;
     public int sphereRadius = 2;
@@ -47,7 +54,7 @@ public class FormationController : MonoBehaviour
         }
         if (triangleFormationBool)
         {
-            TriangleFormation();
+            TriangleFormation(triangleDirection);
         }
         if (sphereFormationBool)
         {
@@ -129,9 +136,10 @@ public class FormationController : MonoBehaviour
             newObj.transform.SetParent(spiral.transform);    // Oluþturulan "newObj" yeni nesneler "Spiral" nesnesinin alt nesnesi olur
         }
     }
-    private void TriangleFormation()
+    private void TriangleFormation(Direction direction)
     {
-        Vector3 targetPos = Vector3.left;
+        //Vector3 targetPos = Vector3.left;
+        Vector3 targetPos = (direction == Direction.Up || direction == Direction.Down) ? new Vector3(-1, 0, 0) : new Vector3(0, -1, 0);
 
         GameObject triangle = new GameObject("Triangle");    // Oyun sahnesinde "Triangle" adlý yeni bir nesne oluþturur
         triangle.transform.position = Vector3.zero;    // "Triangle" nesnesini pozisyonunu sýfýrlar
@@ -141,12 +149,28 @@ public class FormationController : MonoBehaviour
             for (int j = 0; j < i; j++)
             {
                 GameObject newObj = Instantiate(prefabObj);
-                targetPos = new Vector3(targetPos.x+rowOffsetX, targetPos.y, 0f);
+                //targetPos = new Vector3(targetPos.x+rowOffsetX, targetPos.y, 0f);
+                //targetPos = new Vector3(targetPos.x, targetPos.y + rowOffsetX, 0f);
+                targetPos = (direction == Direction.Up || direction == Direction.Down) ? new Vector3(targetPos.x + widthOffset, targetPos.y, 0f) : new Vector3(targetPos.x, targetPos.y + widthOffset, 0f);
                 newObj.transform.position = targetPos;
                 newObj.transform.SetParent(triangle.transform);    // Oluþturulan "newObj" yeni nesneler "Triangle" nesnesinin alt nesnesi olur
+            }        
+            
+            switch (direction)
+            {
+                case Direction.Up:
+                    targetPos = new Vector3((rowOffset*i)-1f,targetPos.y+ heightOffset, 0f);    // Up Direction
+                    break;
+                case Direction.Down:
+                    targetPos = new Vector3((rowOffset * i) - 1f, targetPos.y - heightOffset, 0f);    // Down Direction
+                    break;
+                case Direction.Left:
+                    targetPos = new Vector3(targetPos.x - heightOffset, (rowOffset * i) - 1f, 0f);    // Down Direction
+                    break;
+                case Direction.Right:
+                    targetPos = new Vector3(targetPos.x + heightOffset, (rowOffset * i) - 1f, 0f);    // Down Direction
+                    break;
             }
-            targetPos = new Vector3((rowOffset*i)-1f,targetPos.y+rowOffsetY,0f);
-           
         }
 
     }
