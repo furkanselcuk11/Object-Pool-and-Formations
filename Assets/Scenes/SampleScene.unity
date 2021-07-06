@@ -123,6 +123,113 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &630634970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 630634972}
+  - component: {fileID: 630634971}
+  m_Layer: 0
+  m_Name: FormationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &630634971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630634970}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ada416c0f55a7647bb1ce2127cc1e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabObj: {fileID: 4848275875644398855, guid: 8e1af1be9b9db604587ac22f9cc07195, type: 3}
+  newObjSize: 25
+  formationSelect: 0
+  circleOffset: 1.25
+  squareOffsetX: -1
+  squareOffsetY: 1.25
+  spiralOffset: 1.25
+  spiralOffsetY: 0.5
+  rows: 8
+  rowOffset: -0.5
+  heightOffset: -1.25
+  widthOffset: 1.25
+  triangleDirection: 0
+  sphereNumberOfPoints: 7
+  sphereRadius: 3
+  sphereMeridians: 7
+--- !u!4 &630634972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630634970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &664428296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664428298}
+  - component: {fileID: 664428297}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &664428297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664428296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d74df0c9a83f0c489d8a4981c97fce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - objectPrefab: {fileID: 4848275875644398855, guid: 3f43472a4a40c9c4899b4e13724b7973, type: 3}
+    poolSize: 4
+  - objectPrefab: {fileID: 4848275875644398855, guid: 339d85bae71d5a4429e4fd045c655460, type: 3}
+    poolSize: 6
+--- !u!4 &664428298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664428296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,22 +416,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ada416c0f55a7647bb1ce2127cc1e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 299e7ff1cfe33404382f3f3c9dfddffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabObj: {fileID: 4848275875644398855, guid: 8e1af1be9b9db604587ac22f9cc07195, type: 3}
-  newObjSize: 25
-  formationSelect: 4
-  circleOffset: 1.25
-  squareOffsetX: -1
-  squareOffsetY: 1.25
-  spiralOffset: 1.25
-  spiralOffsetY: 0.5
-  rows: 8
-  rowOffset: -0.5
-  heightOffset: -1.25
-  widthOffset: 1.25
-  triangleDirection: 0
-  sphereNumberOfPoints: 7
-  sphereRadius: 3
-  sphereMeridians: 7
+  spawnInterval: 1
+  objectPool: {fileID: 664428297}
