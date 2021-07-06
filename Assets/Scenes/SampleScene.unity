@@ -314,6 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabObj: {fileID: 4848275875644398855, guid: 8e1af1be9b9db604587ac22f9cc07195, type: 3}
   newObjSize: 25
+  formationSelect: 4
   circleOffset: 1.25
   squareOffsetX: -1
   squareOffsetY: 1.25
@@ -327,8 +328,3 @@ MonoBehaviour:
   sphereNumberOfPoints: 7
   sphereRadius: 3
   sphereMeridians: 7
-  circleFormationBool: 0
-  squareFormationBool: 0
-  spiralFormationBool: 0
-  triangleFormationBool: 1
-  sphereFormationBool: 0
