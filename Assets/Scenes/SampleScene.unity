@@ -323,7 +323,11 @@ MonoBehaviour:
   rowOffset: -0.5
   rowOffsetY: -1
   rowOffsetX: 1
+  sphereNumberOfPoints: 7
+  sphereRadius: 3
+  sphereMeridians: 7
   circleFormationBool: 0
   squareFormationBool: 0
   spiralFormationBool: 0
-  triangleFormationBool: 1
+  triangleFormationBool: 0
+  sphereFormationBool: 1

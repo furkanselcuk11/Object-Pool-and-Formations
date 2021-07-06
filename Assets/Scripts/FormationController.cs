@@ -20,12 +20,17 @@ public class FormationController : MonoBehaviour
     public float rowOffset = -0.5f; // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
     public float rowOffsetY = -1f;  // Yeni eklenecek nesnelerinin Y eksenindeki uzaklýk mesafesi 
     public float rowOffsetX = 1f;   // Yeni eklenecek nesnelerinin X eksenindeki uzaklýk mesafesi 
+    [Header("Sphere Settings")]
+    public int sphereNumberOfPoints = 5;
+    public int sphereRadius = 2;
+    public int sphereMeridians = 5;
 
     [Header("Formations Bool")]
     public bool circleFormationBool = false;
     public bool squareFormationBool = false;
     public bool spiralFormationBool = false;
     public bool triangleFormationBool = false;
+    public bool sphereFormationBool = false;
     void Start()
     {
         if (circleFormationBool)
@@ -43,6 +48,10 @@ public class FormationController : MonoBehaviour
         if (triangleFormationBool)
         {
             TriangleFormation();
+        }
+        if (sphereFormationBool)
+        {
+            SphereFormation(sphereNumberOfPoints,sphereRadius,sphereMeridians);
         }
     }
 
@@ -140,5 +149,49 @@ public class FormationController : MonoBehaviour
            
         }
 
+    }
+    private void SphereFormation(int numberOfPoints, int radius,int numberOfMeridians)
+    {
+        List<GameObject> spheres = HalfCircle(numberOfPoints, radius);  // Boþ nesne oluþturulur
+        GameObject sphere = GameObject.Find("Sphere");    // Oyun sahnesinde "Sphere" adlý nesneyi arar
+
+        for (int i = 0; i < numberOfMeridians; i++) // Çizilecek meridyen sayýsýný ayarlar
+        {
+            float phi = 2 * Mathf.PI * ((float)i / (float)numberOfMeridians);
+            for (int j = 1; j < numberOfPoints; j++)
+            {
+                GameObject newObj = Instantiate(prefabObj);
+
+                float X = spheres[j].transform.position.x;
+                float Y = spheres[j].transform.position.y * Mathf.Cos(phi) - spheres[j].transform.position.z * Mathf.Sin(phi);
+                float Z = spheres[j].transform.position.z * Mathf.Cos(phi) + spheres[j].transform.position.y * Mathf.Sin(phi);
+
+                newObj.transform.position = new Vector3(X, Y, Z);
+                newObj.transform.SetParent(sphere.transform);
+            }
+        }
+    }
+    private List<GameObject> HalfCircle(int numberOfPoints,int radius)
+    {  
+        // Yarým çember þeklinde oluþrulan nesneler
+        int pieces = numberOfPoints - 1;
+
+        List<GameObject> spheres = new List<GameObject>();  // Boþ nesne oluþturulur
+        GameObject sphere = new GameObject("Sphere");    // Oyun sahnesinde "Sphere" adlý yeni bir nesne oluþturur
+        sphere.transform.position = Vector3.zero;    // "Sphere" nesnesini pozisyonunu sýfýrlar
+
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            GameObject newObj = Instantiate(prefabObj);
+
+            float theta = Mathf.PI * i / pieces;
+            float X = Mathf.Cos(theta) * radius;
+            float Y = Mathf.Sin(theta) * radius;
+
+            newObj.transform.position = new Vector3(X, Y, 0f);  // Oluþturulan nesnelerin pozisyonu belirlenir
+            newObj.transform.SetParent(sphere.transform);    // Oluþturulan "newObj" yeni nesneler "Sphere" nesnesinin alt nesnesi olur  
+            spheres.Add(newObj);    // Oluþturlan her yeni nesne "spheres" listesine eklenir
+        }
+        return spheres; // Liste döndürülür
     }
 }
