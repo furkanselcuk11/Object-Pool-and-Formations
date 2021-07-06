@@ -8,6 +8,10 @@ public class FormationController : MonoBehaviour
     public GameObject prefabObj;
     public int newObjSize = 10;    // Eklenecek prefabObj sayýsý
 
+    private enum Formation { Circle, Square, Spiral, Trangle, Sphere };   // Üçgenin hangi yöne bakacaðý
+    [Header("Formations Selection")]
+    [SerializeField] private Formation formationSelect;    
+
     [Header("Circle Settings")]
     public float circleOffset = 1.25f;    // Yeni eklenecek nesneler arasý uzaklýk mesafesi 
 
@@ -32,33 +36,31 @@ public class FormationController : MonoBehaviour
     public int sphereRadius = 2;
     public int sphereMeridians = 5;
 
-    [Header("Formations Bool")]
-    public bool circleFormationBool = false;
-    public bool squareFormationBool = false;
-    public bool spiralFormationBool = false;
-    public bool triangleFormationBool = false;
-    public bool sphereFormationBool = false;
+    
     void Start()
     {
-        if (circleFormationBool)
+        FormationSelect(formationSelect);
+
+    }
+    private void FormationSelect(Formation formation)
+    {
+        switch (formation)
         {
-            CircleFormation();
-        }
-        if (squareFormationBool)
-        {
-            SquareFormation();
-        }
-        if (spiralFormationBool)
-        {
-            SpiralFormation();
-        }
-        if (triangleFormationBool)
-        {
-            TriangleFormation(triangleDirection);
-        }
-        if (sphereFormationBool)
-        {
-            SphereFormation(sphereNumberOfPoints,sphereRadius,sphereMeridians);
+            case Formation.Circle:
+                CircleFormation();
+                break;
+            case Formation.Square:
+                SquareFormation();
+                break;
+            case Formation.Spiral:
+                SpiralFormation();
+                break;
+            case Formation.Trangle:
+                TriangleFormation(triangleDirection);
+                break;
+            case Formation.Sphere:
+                SphereFormation(sphereNumberOfPoints, sphereRadius, sphereMeridians);
+                break;
         }
     }
 
