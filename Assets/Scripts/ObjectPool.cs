@@ -14,11 +14,11 @@ public class ObjectPool : MonoBehaviour
         public int poolSize;  // Oluþturulacak nesne sayýsý
     }
 
-    [SerializeField] private Pool[] pools = null;
+    [SerializeField] private Pool[] pools = null;  
 
     private void Awake()
-    {   // --- Havuz oluþturma ---        
-
+    {
+        // --- Havuz oluþturma Çoklu Obje ---   
         for (int j = 0; j < pools.Length; j++)
         {
             pools[j].pooledObjects = new Queue<GameObject>(); // Yeni bir sýra oluþturulur
@@ -31,7 +31,8 @@ public class ObjectPool : MonoBehaviour
                 pools[j].pooledObjects.Enqueue(newObj);  // Oluþturulan yeni nesneler sýraya eklenir "poolSize" deðeri kadar nesne eklenir
             }
         }
-    }
+    }    
+    
     public GameObject GetPooledObject(int objectType)
     {
         if (objectType>=pools.Length)
@@ -45,4 +46,5 @@ public class ObjectPool : MonoBehaviour
         // (newObj1,newObj2,newObj3,newObj1,newObj2,newObj3) þeklinde döner
         return newObj;
     }
+    
 }
